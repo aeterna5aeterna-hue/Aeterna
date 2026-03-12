@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aeterna | Memoriales para Mascotas - Amor Eterno</title>
+    
+    <!-- Bootstrap 5.3 CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@11.6.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        :root {
+            --color-primary: #008080; /* Teal principal */
+            --color-secondary: #005a8d; /* Azul profundo */
+            --color-accent: #d4af37; /* Dorado suave para calidez */
+            --color-bg: #f8f9fa;
+            --color-text: #2d3436;
+            --glass-bg: rgba(255, 255, 255, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.3);
+            --gradient-main: linear-gradient(135deg, #008080 0%, #005a8d 100%);
+            --transition-smooth: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--color-text);
+            background-color: var(--color-bg);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* --- Estilos de Glassmorphism --- */
+        .glass-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+        }
+
+        /* --- Navbar --- */
+        .navbar {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            transition: var(--transition-smooth);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand svg {
+            width: 40px;
+            height: auto;
+            vertical-align: middle;
+        }
+
+        .nav-link {
+            color: var(--color-text) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--gradient-main);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* --- Hero Section with Parallax --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            background: #1e272e;
+        }
+
+        .hero-video-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), 
+                        url('https://images.unsplash.com/photo-1544568100-847a948585b9?auto=format&fit=crop&q=80&w=1920') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 2rem;
+        }
+
+        .btn-aeterna {
+            background: var(--gradient-main);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 15px rgba(0, 128, 128, 0.3);
+        }
+
+        .btn-aeterna:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 128, 128, 0.4);
+            color: white;
+        }
+
+        /* --- Secciones Generales --- */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            margin-bottom: 3rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background: var(--gradient-main);
+            bottom: -10px;
+            left: 25%;
+            border-radius: 2px;
+        }
+
+        /* --- Productos --- */
+        .product-card {
+            overflow: hidden;
+            transition: var(--transition-smooth);
+            border: none;
+            height: 100%;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .product-img {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .price-tag {
+            color: var(--color-primary);
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        /* --- Testimonios --- */
+        .testimonial-item {
+            font-style: italic;
+            padding: 2rem;
+        }
+
+        /* --- Formulario --- */
+        .form-control {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 12px;
+            transition: var(--transition-smooth);
+        }
+
+        .form-control:focus {
+            background: white;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 0.2rem rgba(0, 128, 128, 0.1);
+        }
+
+        .error-message {
+            color: #d63031;
+            font-size: 0.85rem;
+            display: none;
+            margin-top: 5px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: #2d3436;
+            color: #dfe6e9;
+            padding: 50px 0 20px;
+        }
+
+        .social-links a {
+            color: white;
+            margin-right: 15px;
+            font-size: 1.5rem;
+            transition: var(--transition-smooth);
+        }
+
+        .social-links a:hover {
+            color: var(--color-primary);
+        }
+
+        /* --- Logo SVG Component --- */
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand logo-container" href="#">
+                <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#008080" />
+                            <stop offset="100%" style="stop-color:#005a8d" />
+                        </linearGradient>
+                    </defs>
+                    <!-- Símbolo Infinito -->
+                    <path d="M30 20 C 15 20, 15 40, 30 40 C 45 40, 55 20, 70 20 C 85 20, 85 40, 70 40 C 55 40, 45 20, 30 20" stroke="url(#logoGrad)" stroke-width="4" stroke-linecap="round" fill="none" />
+                    <!-- Silueta Perro Simplificada -->
+                    <path d="M68 22 Q 72 15, 76 22 L 78 20 Q 82 25, 78 30 L 74 30" stroke="url(#logoGrad)" stroke-width="2" fill="none" />
+                </svg>
+                <div class="d-flex flex-column">
+                    <span class="fw-bold h4 mb-0 text-dark" style="letter-spacing: 1px;">AETERNA</span>
+                    <small class="text-muted" style="font-size: 10px; margin-top: -5px;">MEMORIALES PARA MASCOTAS</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#nosotros">Nosotros</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#productos">Colección</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonios">Historias</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="hero">
+        <div class="hero-video-fallback" id="parallax-bg"></div>
+        <div class="hero-content" data-aos="fade-up">
+            <h1 class="display-3 fw-bold mb-3">Un vínculo que trasciende el tiempo</h1>
+            <p class="lead mb-5 px-md-5">Lleva contigo la esencia de quien siempre estuvo a tu lado. Joyería de cremación artesanal diseñada para honrar un amor eterno.</p>
+            <a href="#productos" class="btn btn-aeterna shadow-lg">Descubrir Colección</a>
+        </div>
+    </section>
+
+    <!-- Quiénes Somos -->
+    <section id="nosotros" class="bg-white">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <h2 class="section-title">Nuestra Misión</h2>
+                    <p class="lead font-serif">En Aeterna, entendemos que una mascota no es solo un animal, es familia.</p>
+                    <p>Nuestra labor nace del respeto y la admiración por ese vínculo incondicional. Creamos piezas minimalistas de alta calidad que sirven como santuarios portátiles, permitiéndote mantener la cercanía física con tus compañeros más leales, incluso después de su partida.</p>
+                    <div class="d-flex gap-4 mt-4">
+                        <div class="text-center">
+                            <i data-lucide="heart" class="text-primary mb-2"></i>
+                            <p class="small fw-bold">Amor Puro</p>
+                        </div>
+                        <div class="text-center">
+                            <i data-lucide="shield-check" class="text-primary mb-2"></i>
+                            <p class="small fw-bold">Calidad Eterna</p>
+                        </div>
+                        <div class="text-center">
+                            <i data-lucide="infinity" class="text-primary mb-2"></i>
+                            <p class="small fw-bold">Remembranza</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 mt-5 mt-lg-0" data-aos="fade-left">
+                    <div class="p-2 glass-card overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1581888227599-779811939961?auto=format&fit=crop&q=80&w=800" alt="Mascota y dueño" class="img-fluid rounded-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section id="productos" style="background-color: #f0f4f4;">
+        <div class="container text-center">
+            <h2 class="section-title">Nuestras Piezas</h2>
+            <div class="row g-4 mt-2">
+                <!-- Producto 1 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="card product-card glass-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?auto=format&fit=crop&q=80&w=400');"></div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold">Collar Gota de Luz</h5>
+                            <p class="text-muted small">Plata esterlina con compartimento sellado para cenizas.</p>
+                            <p class="price-tag mb-3">$1,250 MXN</p>
+                            <button class="btn btn-outline-primary w-100 rounded-pill">Ver detalles</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 2 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="card product-card glass-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=400');"></div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold">Pulsera Infinito</h5>
+                            <p class="text-muted small">Diseño ajustable en acero quirúrgico y detalles en teal.</p>
+                            <p class="price-tag mb-3">$980 MXN</p>
+                            <button class="btn btn-outline-primary w-100 rounded-pill">Ver detalles</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- Producto 3 -->
+                <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="card product-card glass-card">
+                        <div class="product-img" style="background-image: url('https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?auto=format&fit=crop&q=80&w=400');"></div>
+                        <div class="card-body p-4">
+                            <h5 class="fw-bold">Relicario Huella</h5>
+                            <p class="text-muted small">Oro rosa de 14k con grabado personalizado incluido.</p>
+                            <p class="price-tag mb-3">$2,400 MXN</p>
+                            <button class="btn btn-outline-primary w-100 rounded-pill">Ver detalles</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section id="testimonios" class="bg-white">
+        <div class="container text-center">
+            <h2 class="section-title">Vuestras Historias</h2>
+            <div class="row mt-5">
+                <div class="col-lg-4" data-aos="fade-up">
+                    <div class="testimonial-item">
+                        <p class="mb-3">"Tener a 'Max' cerca de mi corazón me ha dado mucha paz. La calidad del collar es excepcional y el diseño es tan sutil que solo yo sé su significado."</p>
+                        <h6 class="fw-bold">— Elena R.</h6>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="testimonial-item">
+                        <p class="mb-3">"Buscaba algo elegante que no pareciera un frasco médico. Aeterna logró exactamente eso. Una joya hermosa para un recuerdo hermoso."</p>
+                        <h6 class="fw-bold">— Carlos M.</h6>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="testimonial-item">
+                        <p class="mb-3">"El proceso de compra fue muy humano y respetuoso. Se nota que aman lo que hacen y entienden nuestro dolor."</p>
+                        <h6 class="fw-bold">— Sofía T.</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section id="contacto" style="background-color: #f8f9fa;">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="glass-card p-5 text-center" data-aos="zoom-in">
+                        <h2 class="section-title">Hablemos</h2>
+                        <p class="mb-5">¿Tienes dudas sobre nuestras piezas o personalización? Estamos aquí para acompañarte.</p>
+                        
+                        <form id="contactForm" novalidate>
+                            <div class="row text-start">
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label small fw-bold">Nombre</label>
+                                    <input type="text" class="form-control" id="name" placeholder="Tu nombre completo">
+                                    <div class="error-message" id="nameError">Por favor, ingresa tu nombre.</div>
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label class="form-label small fw-bold">Email</label>
+                                    <input type="email" class="form-control" id="email" placeholder="hola@ejemplo.com">
+                                    <div class="error-message" id="emailError">Ingresa un correo electrónico válido.</div>
+                                </div>
+                                <div class="col-12 mb-4">
+                                    <label class="form-label small fw-bold">Mensaje</label>
+                                    <textarea class="form-control" id="message" rows="4" placeholder="¿Cómo podemos ayudarte?"></textarea>
+                                    <div class="error-message" id="messageError">El mensaje no puede estar vacío.</div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-aeterna w-100">Enviar Mensaje</button>
+                                </div>
+                            </div>
+                        </form>
+                        <div id="successMessage" class="mt-4 text-success fw-bold d-none">
+                            ¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="logo-container mb-3">
+                        <svg width="30" viewBox="0 0 100 60" fill="none">
+                            <path d="M30 20 C 15 20, 15 40, 30 40 C 45 40, 55 20, 70 20 C 85 20, 85 40, 70 40 C 55 40, 45 20, 30 20" stroke="#008080" stroke-width="6" fill="none" />
+                        </svg>
+                        <span class="fw-bold h5 mb-0 text-white">AETERNA</span>
+                    </div>
+                    <p class="small">Honrando el amor incondicional a través de la belleza y la remembranza eterna.</p>
+                </div>
+                <div class="col-md-4 mb-4 text-md-center">
+                    <h6 class="fw-bold text-white mb-3">Enlaces Rápidos</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="#inicio" class="text-decoration-none text-white-50">Inicio</a></li>
+                        <li><a href="#productos" class="text-decoration-none text-white-50">Colección</a></li>
+                        <li><a href="#" class="text-decoration-none text-white-50">Políticas de Envío</a></li>
+                        <li><a href="#" class="text-decoration-none text-white-50">Aviso Legal</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4 text-md-end">
+                    <h6 class="fw-bold text-white mb-3">Síguenos</h6>
+                    <div class="social-links">
+                        <a href="#"><i data-lucide="instagram"></i></a>
+                        <a href="#"><i data-lucide="facebook"></i></a>
+                        <a href="#"><i data-lucide="message-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="mt-4 border-secondary">
+            <div class="text-center small text-white-50">
+                &copy; 2024 Aeterna Memoriales. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inicializar Iconos y Animaciones
+        lucide.createIcons();
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic'
+        });
+
+        // Parallax Effect en Hero
+        window.addEventListener('scroll', () => {
+            const parallax = document.getElementById('parallax-bg');
+            let offset = window.pageYOffset;
+            parallax.style.backgroundPositionY = offset * 0.7 + 'px';
+        });
+
+        // Validación de Formulario (Principios Nielsen: Prevención de errores)
+        const form = document.getElementById('contactForm');
+        const successMsg = document.getElementById('successMessage');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            let isValid = true;
+
+            const name = document.getElementById('name');
+            const email = document.getElementById('email');
+            const message = document.getElementById('message');
+
+            // Reset errores
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.form-control').forEach(el => el.style.borderColor = '#ddd');
+
+            // Validación Nombre
+            if (name.value.trim() === '') {
+                document.getElementById('nameError').style.display = 'block';
+                name.style.borderColor = '#d63031';
+                isValid = false;
+            }
+
+            // Validación Email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.value)) {
+                document.getElementById('emailError').style.display = 'block';
+                email.style.borderColor = '#d63031';
+                isValid = false;
+            }
+
+            // Validación Mensaje
+            if (message.value.trim() === '') {
+                document.getElementById('messageError').style.display = 'block';
+                message.style.borderColor = '#d63031';
+                isValid = false;
+            }
+
+            if (isValid) {
+                // Feedback Inmediato
+                form.style.opacity = '0.3';
+                form.style.pointerEvents = 'none';
+                
+                // Simulación de envío
+                setTimeout(() => {
+                    form.classList.add('d-none');
+                    successMsg.classList.remove('d-none');
+                }, 1500);
+            }
+        });
+
+        // Navegación Activa (Heurística Nielsen: Visibilidad del estado)
+        window.addEventListener('scroll', () => {
+            let sections = document.querySelectorAll('section');
+            let navLinks = document.querySelectorAll('.nav-link');
+            
+            sections.forEach(sec => {
+                let top = window.scrollY;
+                let offset = sec.offsetTop - 150;
+                let height = sec.offsetHeight;
+                let id = sec.getAttribute('id');
+
+                if(top >= offset && top < offset + height) {
+                    navLinks.forEach(links => {
+                        links.classList.remove('active');
+                        document.querySelector('.navbar-nav a[href*=' + id + ']')?.classList.add('active');
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
